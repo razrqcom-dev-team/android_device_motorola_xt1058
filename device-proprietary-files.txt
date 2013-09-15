@@ -1,5 +1,3 @@
 # proprietary file list
 # bin/filename
-etc/firmware/synaptics-s3402-13040101-164656-ghost.tdat
-etc/firmware/synaptics-s3402b-13050201-167746-ghost.tdat
-etc/firmware/synaptics-s3402-13040101-164656-ghost-p1a.tdat
+
