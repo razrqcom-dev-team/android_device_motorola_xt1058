@@ -22,12 +22,6 @@ $(call inherit-product, device/motorola/msm8960dt-common/msm8960dt.mk)
 
 LOCAL_PATH := device/motorola/xt1058
 
-#ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := $(LOCAL_PATH)/kernel
-#else
-#LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-#endif
-
 # xt1058 specific overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
