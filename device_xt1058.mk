@@ -1,13 +1,29 @@
+#
+# Copyright (C) 2013 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-$(call inherit-product, device/motorola/msm8960-common/msm8960.mk)
+$(call inherit-product, device/motorola/msm8960dt-common/msm8960dt.mk)
 
 LOCAL_PATH := device/motorola/xt1058
 
 #ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := $(DEVICE_FOLDER)/kernel
+LOCAL_KERNEL := $(LOCAL_PATH)/kernel
 #else
 #LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 #endif
@@ -20,34 +36,18 @@ PRODUCT_LOCALES += xhdpi
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-# Stk
-PRODUCT_PACKAGES += \
-    Stk
-
-# QCOM Display
+#telephony
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=320
+	telephony.lteOnGsmDevice=1 \
+	telephony.lteOnCdmaDevice=0 \
+	ro.telephony.default_network=9 \
+	persist.radio.no_wait_for_card=1 \
+	persist.radio.dfr_mode_set=1 \
+	persist.rmnet.mux=disabled \
+	persist.radio.eons.enabled=1 \
+	ro.telephony.ril.v3=signalstrength
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.config.svlte1x=true \
-	persist.radio.eons.enabled= true \
-	ro.telephony.gsm-routes-us-smsc=1 \
-	ro.gsm.data_retry_config=default_randomization=2000,max_retries=infinite,1000,1000,80000,125000,485000,905000 \
-	ro.gsm.2nd_data_retry_config=max_retries=1,15000 \
-	persist.radio.mode_pref_nv10=1 \
-	persist.radio.vrte_logic=2 \
-	persist.radio.0x9e_not_callname=1 \
-	persist.radio.skip_data_check=1 \
-	persist.ril.max.crit.qmi.fails=4 \
-	ro.telephony.default_network=10 \
-	ro.mot.ignore_csim_appid=true \
-	persist.timed.enable=true
-
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/config/gps.conf:system/etc/gps.conf
-
-$(call inherit-product, device/motorola/msm8960-common/idc/idc.mk)
-$(call inherit-product, device/motorola/msm8960-common/keychars/keychars.mk)
-$(call inherit-product, device/motorola/msm8960-common/keylayout/keylayout.mk)
-$(call inherit-product, device/motorola/msm8960-common/modules/nfc/nfc.mk)
-$(call inherit-product-if-exists, vendor/motorola/xt1058/xt1058-vendor.mk)
+$(call inherit-product, device/motorola/msm8960dt-common/keylayout/keylayout.mk)
+$(call inherit-product, device/motorola/qcom-common/keylayout/keylayout.mk)
+$(call inherit-product, device/motorola/qcom-common/modules/nfc/nfc.mk)
+$(call inherit-product, vendor/motorola/xt1058/xt1058-vendor.mk)
