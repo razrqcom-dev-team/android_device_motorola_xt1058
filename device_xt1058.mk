@@ -38,8 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.radio.no_wait_for_card=1 \
 	persist.radio.dfr_mode_set=1 \
 	persist.rmnet.mux=disabled \
-	persist.radio.eons.enabled=1 \
-	ro.telephony.ril.v3=signalstrength
+	persist.radio.eons.enabled=1
 
 $(call inherit-product, device/motorola/msm8960dt-common/keylayout/keylayout.mk)
 $(call inherit-product, device/motorola/qcom-common/keylayout/keylayout.mk)
